@@ -6,21 +6,50 @@
     <title>Piedra, papel, tijeras</title>
 </head>
 <body>
+    <button id="rock">Rock</button>
+    <button id="papper">Papper</button>
+    <button id="scissors">Scissors</button>
+    <div id="resultado"></div>
 <script>
 
 let humanScore = 0;
 let computerScore = 0;
-
+let playGameScore = 1;
 //Crear una función de play game que permita al jugador jugar 5 veces.
+function playerSelection(selection){
+
+    if(humanScore >=5){
+        document.getElementById("resultado").innerHTML = "GANA EL JUEGO PC";
+    }else if(computerScore >=5){
+        document.getElementById("resultado").innerHTML = "GANA EL JUEGO HUMANO";
+    }else{
+
+
+
+    getComputerChoice();
+    
+
+    let result = playRound(getComputerChoice(), selection);
+        let print = ("<br>Ronda "+playGameScore+"<br>"+result+"<br>Tu puntuación: "+humanScore + "<br>Puntuación PC: "+computerScore);
+        document.getElementById("resultado").innerHTML = print;
+        playGameScore++;
+        
+    }
+    
+}
+
 function playGame(){
     console.log("**********\nPIEDRA - PAPEL - TIJERAS\n**********\n")
     let playGame = 1;
-    while(playGame < 6){
+    console.log("Escribe opción en pantalla");
+        let result = playRound(getComputerChoice(), getHumanChoice());
+        console.log("Ronda "+playGame+"\n"+result+"\nTu puntuación: "+humanScore + "\nPuntuación PC: "+computerScore);
+    /*while(playGame < 6){
         console.log("Escribe opción en pantalla");
         let result = playRound(getComputerChoice(), getHumanChoice());
         console.log("Ronda "+playGame+"\n"+result+"\nTu puntuación: "+humanScore + "\nPuntuación PC: "+computerScore);
         playGame++;
-    }
+    }*/
 
 }
 //Crear una funcion getComputerChoice que me devuelva la decision del Pc
@@ -58,9 +87,15 @@ console.log(humanChoise + " vs " + computerChoise);
     }
 }
 
-playGame();
-
-
+document.getElementById("rock").addEventListener("click", function() {
+    playerSelection("piedra");
+});
+document.getElementById("papper").addEventListener("click", function() {
+    playerSelection("papel");
+});
+document.getElementById("scissors").addEventListener("click", function() {
+    playerSelection("tijeras");
+});
 
     
    
